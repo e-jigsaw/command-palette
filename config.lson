@@ -1,0 +1,4 @@
+\git-plus :
+  alias: \g
+  commands:
+    co: \checkout

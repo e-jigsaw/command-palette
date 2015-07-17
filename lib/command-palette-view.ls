@@ -2,6 +2,7 @@ require! {
   \underscore-plus : _
   \atom-space-pen-views : {SelectListView, $, $$}
   fuzzaldrin
+  \./completeQuery.ls
 }
 
 class CommandPaletteView extends SelectListView
@@ -11,7 +12,10 @@ class CommandPaletteView extends SelectListView
     super!
     @addClass \command-palette
 
-  getFilterKey: -> \displayName
+  getFilterKey: -> \name
+
+  getFilterQuery: ->
+    @filterEditorView.getText! |> completeQuery
 
   cancelled: -> @hide!
 
@@ -33,7 +37,7 @@ class CommandPaletteView extends SelectListView
 
     commands = atom.commands.findCommands do
       target: @eventElement
-    commands = _.sortBy commands, \displayName
+    commands = _.sortBy commands, \name
     @setItems commands
 
     @focusFilterEditor!
@@ -43,9 +47,7 @@ class CommandPaletteView extends SelectListView
 
   viewForItem: ({name, displayName, eventDescription}) ->
     keyBindings = @keyBindings
-    # Style matched characters in search results
-    filterQuery = @getFilterQuery!
-    matches = fuzzaldrin.match displayName, filterQuery
+    matches = fuzzaldrin.match name, @getFilterQuery!
 
     $$ ->
       highlighter = (command, matches, offsetIndex) ~>
@@ -76,7 +78,7 @@ class CommandPaletteView extends SelectListView
         @text command.substring lastIndex
 
       @li do
-        class: 'event'
+        class: \event
         \data-event-name : name
         ~>
           @div do
@@ -86,9 +88,12 @@ class CommandPaletteView extends SelectListView
                 @kbd do
                   _.humanizeKeystroke binding.keystrokes
                   class: \key-binding
+          @p do
+            class: \command-name
+            -> highlighter name, matches, 0
           @span do
-            title: name
-            -> highlighter displayName, matches, 0
+            class: \command-description
+            displayName
 
   confirmed: ({name}) ->
     @cancel!
