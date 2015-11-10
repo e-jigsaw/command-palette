@@ -1,6 +1,6 @@
 {
   "name": "command-palette",
-  "version": "0.36.0",
+  "version": "0.37.0",
   "main": "index.coffee",
   "description": "Find and run available commands using `cmd-shift-p` (OSX) or `ctrl-shift-p` (Linux/Windows).",
   "repository": "https://github.com/atom/command-palette",
@@ -12,7 +12,7 @@
     "atom-livescript": "0.0.1",
     "atom-lson": "0.0.1",
     "atom-space-pen-views": "^2.0.0",
-    "fuzzaldrin": "^2.1.0",
+    "fuzzaldrin-plus": "^0.1.0",
     "underscore-plus": "^1.0.0"
   },
   "devDependencies": {

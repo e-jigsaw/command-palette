@@ -1,7 +1,7 @@
 require! {
   \underscore-plus : _
   \atom-space-pen-views : {SelectListView, $, $$}
-  fuzzaldrin
+  \fuzzaldrin-plus : fuzzaldrin
   \./completeQuery.ls
 }
 
