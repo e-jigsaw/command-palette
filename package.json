@@ -1,6 +1,6 @@
 {
   "name": "command-palette",
-  "version": "0.37.0",
+  "version": "0.38.0",
   "main": "index.coffee",
   "description": "Find and run available commands using `cmd-shift-p` (OSX) or `ctrl-shift-p` (Linux/Windows).",
   "repository": "https://github.com/atom/command-palette",
